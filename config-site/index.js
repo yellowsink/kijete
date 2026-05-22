@@ -1,8 +1,10 @@
 import { $, useEffect, store, html, If, For, Fragment, render } from "voby";
-import { base64_encode } from "./b64"
+import { base64_decode, base64_encode } from "./b64"
 import { cook } from "./cooker"
 
-const data = store({ barcodes: [] });
+const window_data = location.hash.substr(1);
+
+const data = store(window_data !== "" ? JSON.parse(base64_decode(window_data)) : { barcodes: [] });
 
 const removeBarcode = (i) => void data.barcodes.splice(i, 1);
 
@@ -95,6 +97,7 @@ const UIBarcode = (i) => {
             <input
               type="text"
               maxlength=${() => (data.barcodes[i].type === "code128" ? 16 : "")}
+              value=${() => data.barcodes[i].data}
               onInput=${(ev) => (data.barcodes[i].data = ev.target.value)}
             />
           </td>

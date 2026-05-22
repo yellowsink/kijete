@@ -35,7 +35,7 @@ function matrix_to_pbi(mat, flat, widthOverride) {
   const height = flat ? flat_barcode_height : mat.length;
 
   const npixels = flat ? width : width * height;
-  const data = new Uint8Array(3 + Math.ceil(npixels / 8));
+  const data = new Uint8Array(3 + ~~(npixels / 8));
 
   // pbi header
   data[0] = +flat;
@@ -51,8 +51,9 @@ function matrix_to_pbi(mat, flat, widthOverride) {
     const y = ~~(i / width);
 
     const value = (flat ? mat[x] : mat[y][x]) || 0;
-    // shift over one and then add this pixel
-    working = (working << 1) | value;
+
+    // add this pixel to the working byte (the endian is weird, don't think about it)
+    working |= (value << i % 8)
 
     if (i % 8 == 7) {
       data[3 + ~~(i / 8)] = working;
@@ -60,6 +61,5 @@ function matrix_to_pbi(mat, flat, widthOverride) {
     }
   }
 
-  // convert to string for pebble use
-  return String.fromCharCode(...data);
+  return [...data];
 }

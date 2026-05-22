@@ -1,6 +1,6 @@
 var Skunk = {};
 
-Skunk.domain = "http://localhost:5173";
+Skunk.domain = "http://yasuko:5173";
 Skunk.state = null;
 //Skunk.token = '';
 Skunk.updating = false;
