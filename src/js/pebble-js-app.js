@@ -1,6 +1,6 @@
 var Skunk = {};
 
-Skunk.domain = "http://yasuko:5173";
+Skunk.domain = "https://yellowsink.github.io/kijete";
 Skunk.state = null;
 //Skunk.token = '';
 Skunk.updating = false;
