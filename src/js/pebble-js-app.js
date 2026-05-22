@@ -99,9 +99,9 @@ Skunk.saveState = function() {
 Skunk.onShowConfiguration = function() {
   var url;
   if (!localStorage.config || localStorage.config === "") {
-    url = Skunk.domain + '/settings';
+    url = Skunk.domain;
   } else {
-    url = Skunk.domain + '/settings#' + base64_encode(localStorage.config);
+    url = Skunk.domain + '#' + base64_encode(localStorage.config);
   }
   Pebble.openURL(url);
 };

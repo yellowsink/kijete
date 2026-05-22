@@ -1,5 +1,7 @@
-<!-- [Rebble App Store](https://apps.rebble.io/en_US/application/553aaf29bf1a5965020000c8)
- -->
+[Core Devices App Store](https://apps.repebble.com/kijete_6a10bbd87d641e0009ce6a58)
+
+[Rebble App Store](https://apps.rebble.io/en_US/application/6a10bbd87d641e0009ce6a58)
+
 ![Screenshot](screenshot.png)
 
 kijete
