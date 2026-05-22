@@ -51,14 +51,14 @@ Layer *pager_layer_get_layer(PagerLayer *pager_layer) {
 }
 
 static void background_update_proc(Layer *layer, GContext* ctx) {
-    graphics_context_set_fill_color(ctx, GColorBlack);
-    graphics_context_set_stroke_color(ctx, GColorWhite);
-    graphics_context_set_text_color(ctx, GColorWhite);
+    graphics_context_set_fill_color(ctx, GColorWhite);
+    graphics_context_set_stroke_color(ctx, GColorBlack);
+    graphics_context_set_text_color(ctx, GColorBlack);
 
     const GRect bounds = layer_get_bounds(layer);
     graphics_fill_rect(ctx, bounds, 0, GCornerNone);
 
-    graphics_context_set_fill_color(ctx, GColorWhite);
+    graphics_context_set_fill_color(ctx, GColorBlack);
 
     PagerLayer *pager_layer = *(PagerLayer **)layer_get_data(layer);
     const uint8_t index = pager_layer->index;
