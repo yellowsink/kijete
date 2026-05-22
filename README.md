@@ -1,44 +1,18 @@
-[Rebble App Store](https://apps.rebble.io/en_US/application/553aaf29bf1a5965020000c8)
-
+<!-- [Rebble App Store](https://apps.rebble.io/en_US/application/553aaf29bf1a5965020000c8)
+ -->
 ![Screenshot](screenshot.png)
 
-Skunk
+kijete
 ===============
 
-Skunk is an app for the [Pebble Smartwatch](https://getpebble.com) that allows easy access to your store cards and other barcodes.
+kijete is an app for [Pebble](https://repebble.com/) that allows you to display Code 128, Aztec, Data Matrix, PDF417,
+and QR codes on your wrist.
 
-Based on [PebbleBucks 3.0 by a2](https://github.com/a2/PebbleBucks), [PebbleBucks 2.0 by Neal](https://github.com/Neal/PebbleBucks), and the [original PebbleBucks by Matt Donders](https://github.com/mattdonders/PebbleBucks).
+It is a fork of [Skunk](https://github.com/unlobito/skunk) by Harley Watson, and is so named because in toki pona,
+a skunk would be described by the word *kijetesantakalu*, or for short, *kijete* or *kije*.
 
-Config is handled via a Ruby web app, [unlobito/skunk-config](https://github.com/unlobito/skunk-config)
+It swaps out a ruby web app for config and barcode generation for a fully client-side JS application.
 
-Building and testing with Nix
------------------------------
-
-This project contains a [pebble.nix](https://github.com/Sorixelle/pebble.nix)
-setup that can be used for building and testing. Builds are also automated
-using GitHub Actions.
-
-Assuming you have Nix installed, building is as simple as
-
-```
-$ nix-build
-[...]
-/nix/store/28ky82g54l35yysrwz79hly84pj4g6qj-skunk-arm-none-eabi
-```
-
-a `.pbw` and an appstore bundle are output to that directory, which is also
-provided as a `./result` symlink.
-
-For running the Pebble SDK directly for use with the Pebble emulator,
-`nix-shell` can be used:
-
-```
-$ nix-shell
-
-[nix-shell]$ pebble install --emulator basalt
-Installing app...
-App install succeeded.
-
-[nix-shell]$ pebble emu-app-config
-[Browser opens]
-```
+Its Aztec code support actually works, and it generates codes that are identical to those in my Google Wallet,
+unlike Skunk, which is generally a desirable trait.
+It is using the [2D-Barcode](https://github.com/zingl/2D-Barcode) library.

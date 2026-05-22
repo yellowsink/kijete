@@ -1,4 +1,4 @@
-Kijete
+kijete
 =======
 
 	Copyright (c) 2026 Hazel Atkinson
@@ -24,7 +24,7 @@ Kijete
 Skunk
 =======
 
-Kijete is a fork of skunk.
+kijete is a fork of skunk.
 
 	Copyright (c) 2015-2022 Harley Watson
 

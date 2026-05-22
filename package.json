@@ -1,13 +1,13 @@
 {
-    "author": "Harley Watson",
+    "author": "Hazel Atkinson",
     "dependencies": {},
     "keywords": [],
-    "name": "skunk",
+    "name": "kijete",
     "pebble": {
         "capabilities": [
             "configurable"
         ],
-        "displayName": "Skunk",
+        "displayName": "kijete",
         "enableMultiJS": false,
         "messageKeys": {
             "card_barcode_data": 22,
@@ -49,7 +49,7 @@
             "emery",
             "gabbro"
         ],
-        "uuid": "1e420b43-63be-45f7-822c-2a7d57a55384",
+        "uuid": "f54ef04c-551f-4a70-be74-4d80f2b3d802",
         "watchapp": {
             "watchface": false
         }
