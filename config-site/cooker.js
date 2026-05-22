@@ -61,5 +61,8 @@ function matrix_to_pbi(mat, flat, widthOverride) {
     }
   }
 
+  if (working !== 0)
+    data[data.length - 1] = working;
+
   return [...data];
 }
