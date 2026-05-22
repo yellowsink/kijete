@@ -1,8 +1,8 @@
 var Skunk = {};
 
-Skunk.domain = 'https://skunk-config.canidae.systems';
+Skunk.domain = "http://localhost:5173";
 Skunk.state = null;
-Skunk.token = '';
+//Skunk.token = '';
 Skunk.updating = false;
 Skunk.version = encodeURIComponent('1.7');
 
@@ -108,9 +108,27 @@ Skunk.onShowConfiguration = function() {
 
 Skunk.onWebViewClosed = function(event) {
   var response = event.response;
-  if (!response || base64_decode(response).indexOf('{') === -1) return;
+  if (!response || base64_decode(response).indexOf("{") === -1) return;
 
-  localStorage.config = base64_decode(response);
+  const resp_parsed = JSON.parse(base64_decode(response));
+
+  const config = JSON.parse(JSON.stringify(resp_parsed)); // im lazy
+
+  config.barcodes.forEach(bc => delete bc.cooked);
+
+  const state_data = {
+    cards: resp_parsed.barcodes.map(bc => ({
+      name: bc.name,
+      barcode_data: bc.cooked
+    }))
+  }
+
+  if (!Skunk.state) Skunk.state = {};
+  Skunk.state.data = state_data;
+  Skunk.state.updated_at = Date.now();
+  Skunk.saveState();
+
+  localStorage.config = JSON.stringify(config);
 
   Pebble.sendAppMessage({pushing_data: true});
 };
@@ -171,7 +189,11 @@ Skunk.onAppMessage = function(event) {
   var payload = event.payload;
   if (payload.fetch_data && !Skunk.updating) {
     Skunk.updating = true;
-    Skunk.fetchData(function(success) {
+    Skunk.sendData(function () {
+      Skunk.updating = false;
+    });
+
+    /* Skunk.fetchData(function(success) {
       var done = function() {
         Skunk.updating = false;
       };
@@ -181,7 +203,7 @@ Skunk.onAppMessage = function(event) {
       } else {
         done();
       }
-    });
+    }); */
   }
 };
 
@@ -190,7 +212,7 @@ Skunk.sendError = function(message) {
   Skunk.sendPayload({ error: message }, 'error');
 };
 
-Skunk.fetchData = function(callback) {
+/* Skunk.fetchData = function(callback) {
   if (!localStorage.config || localStorage.config === "") {
     console.log('[fetchData] No state.');
     Skunk.sendError('Please open Settings.');
@@ -228,10 +250,10 @@ Skunk.fetchData = function(callback) {
 
   console.log('[fetchData] Fetching data...');
   xhr.send(localStorage.config);
-};
+}; */
 
 Skunk.init = function() {
-  Skunk.token = encodeURIComponent(Pebble.getAccountToken());
+  //Skunk.token = encodeURIComponent(Pebble.getAccountToken());
 
   Pebble.addEventListener('showConfiguration', Skunk.onShowConfiguration);
   Pebble.addEventListener('webviewclosed', Skunk.onWebViewClosed);
